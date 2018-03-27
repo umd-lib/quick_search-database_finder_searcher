@@ -4,19 +4,22 @@ Database Finder searcher for NCSU Quick Search
 
 ## Installation
 
-Include the searcher gem in your Gemfile:
+1) Include the searcher gem in your Gemfile:
 
 ```
 gem 'quick_search-database_finder_searcher'
 ```
 
-Run bundle install:
+2) Run bundle install:
 
 ```
 bundle install
 ```
 
-Include in your Search Results page
+4) Update the config/quick_search_config.yml to include the "database_finder"
+   searcher.
+
+3) Include in your Search Results page
 
 ```
 <%= render_module(@database_finder, 'database_finder') %>
