@@ -1,2 +1,2 @@
-QuickSearch::DatabaseFinderSearcher::Engine.routes.draw do
+QuickSearchDatabaseFinderSearcher::Engine.routes.draw do
 end

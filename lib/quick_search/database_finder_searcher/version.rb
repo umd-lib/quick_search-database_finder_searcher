@@ -1,5 +1,3 @@
-module QuickSearch
-  module DatabaseFinderSearcher
-    VERSION = '0.1.0'
-  end
+module QuickSearchDatabaseFinderSearcher
+  VERSION = '0.1.0'
 end

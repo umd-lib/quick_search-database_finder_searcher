@@ -1,7 +1,5 @@
-module QuickSearch
-  module DatabaseFinderSearcher
-    class Engine < ::Rails::Engine
-      isolate_namespace QuickSearch::DatabaseFinderSearcher
-    end
+module QuickSearchDatabaseFinderSearcher
+  class Engine < ::Rails::Engine
+    isolate_namespace QuickSearchDatabaseFinderSearcher
   end
 end
