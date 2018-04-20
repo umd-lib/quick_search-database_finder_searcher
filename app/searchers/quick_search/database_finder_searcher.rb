@@ -19,7 +19,7 @@ module QuickSearch
         search_result_list.each do |value|
           result = OpenStruct.new
           result.title = value['displayName']
-          result.link = value['detailLink']
+          result.link = value['hostUrl']
           result.description = value['description']
           @results_list << result
         end
