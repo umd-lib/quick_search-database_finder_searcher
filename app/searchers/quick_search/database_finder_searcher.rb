@@ -8,7 +8,6 @@ module QuickSearch
     include ActionView::Helpers::TextHelper
     include ActionView::Helpers::TagHelper
     include ActionView::Helpers::UrlHelper
-    include ActionView::Helpers::UrlHelper
     def search
       resp = @http.get(search_url)
       @response = JSON.parse(resp.body)
