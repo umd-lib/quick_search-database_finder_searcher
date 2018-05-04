@@ -36,8 +36,16 @@ module QuickSearch
     def results
       return @results_list if @results_list
       @results_list = @response['resultList'].map do |value|
+        # We want to show a result even if it doesn't have a hostUrl
+        # (some Database Finder entries point to services that are no
+        # no longer available, but are kept for historical/informational
+        # purposes). Since the NCSU QuickSearch code wants to suppress
+        # results without hostUrls, we'll default to "#" if the
+        # result doesn't have one.
+        host_url = value['hostUrl'].presence || '#'
+
         result = OpenStruct.new(title: value['displayName'],
-                                link: value['hostUrl'],
+                                link: host_url,
                                 description: build_description_block(value['description']),
                                 date: build_info_link(value['detailLink']))
         result.date << build_restricted_link if value['restricted']
