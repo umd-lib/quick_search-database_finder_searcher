@@ -58,7 +58,7 @@ module QuickSearch
     def search_url
       QuickSearch::Engine::DATABASE_FINDER_CONFIG['search_url'] +
         QuickSearch::Engine::DATABASE_FINDER_CONFIG['query_params'] +
-        http_request_queries['not_escaped']
+        http_request_queries['uri_escaped']
     end
 
     def total
