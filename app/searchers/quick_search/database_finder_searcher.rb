@@ -33,7 +33,7 @@ module QuickSearch
       content_tag(:div, raw(desc), class: ['block-with-text'])
     end
 
-    def results
+    def results # rubocop:disable Metrics/MethodLength
       return @results_list if @results_list
       @results_list = @response['resultList'].map do |value|
         # We want to show a result even if it doesn't have a hostUrl
@@ -58,7 +58,7 @@ module QuickSearch
     def search_url
       QuickSearch::Engine::DATABASE_FINDER_CONFIG['search_url'] +
         QuickSearch::Engine::DATABASE_FINDER_CONFIG['query_params'] +
-        http_request_queries['uri_escaped']
+        CGI.escape(sanitized_user_search_query)
     end
 
     def total
@@ -66,7 +66,15 @@ module QuickSearch
     end
 
     def loaded_link
-      QuickSearch::Engine::DATABASE_FINDER_CONFIG['loaded_link'] + http_request_queries['uri_escaped']
+      QuickSearch::Engine::DATABASE_FINDER_CONFIG['loaded_link'] + sanitized_user_search_query
+    end
+
+    # Returns the sanitized search query entered by the user, skipping
+    # the default QuickSearch query filtering
+    def sanitized_user_search_query
+      # Need to use "to_str" as otherwise Japanese text isn't returned
+      # properly
+      sanitize(@q).to_str
     end
   end
 end
