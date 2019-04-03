@@ -44,7 +44,7 @@ module QuickSearch
         # result doesn't have one.
         host_url = value['hostUrl'].presence || '#'
 
-        result = OpenStruct.new(title: value['displayName'],
+        result = OpenStruct.new(title: value['name'],
                                 link: host_url,
                                 description: build_description_block(value['description']),
                                 date: build_info_link(value['detailLink']))
