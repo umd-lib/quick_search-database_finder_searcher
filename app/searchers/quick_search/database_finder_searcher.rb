@@ -33,7 +33,7 @@ module QuickSearch
       content_tag(:div, raw(desc), class: ['block-with-text'])
     end
 
-    def results # rubocop:disable Metrics/MethodLength
+    def results # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       return @results_list if @results_list
       @results_list = @response['resultList'].map do |value|
         # We want to show a result even if it doesn't have a hostUrl
@@ -44,11 +44,21 @@ module QuickSearch
         # result doesn't have one.
         host_url = value['hostUrl'].presence || '#'
 
+        info_link = value['detailLink']
+        restricted = value['restricted']
+
         result = OpenStruct.new(title: value['name'],
                                 link: host_url,
                                 description: build_description_block(value['description']),
-                                date: build_info_link(value['detailLink']))
-        result.date << build_restricted_link if value['restricted']
+                                date: build_info_link(info_link))
+
+        # The following is a kludge to display the "i" and "lock" icons
+        # in the searchumd QuickSearch GUI.
+        result.date << build_restricted_link if restricted
+
+        result.restricted = restricted
+        result.info_link = info_link
+        result.item_format = 'database'
         result
       end
 
