@@ -34,3 +34,11 @@ application (the "searchers" subdirectory may need to be created), and copy the
 instructions in the file to configure the searcher.
 
 Additional customizations can be done by editing the "config/locales/en.yml" file.
+
+## Additional Result Information
+
+This searcher returns the following additional information about each item:
+
+* "restricted" - true if the item has restricted remote access, false otherwise.
+* "info_link" - a URL to the entry in Database Finder
+* "item_format" - Always returns "database"
