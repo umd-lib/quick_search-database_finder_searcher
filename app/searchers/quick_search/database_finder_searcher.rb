@@ -46,6 +46,7 @@ module QuickSearch
 
         info_link = value['detailLink']
         restricted = value['restricted']
+        open_access = value['openAccess']
 
         result = OpenStruct.new(title: value['name'],
                                 link: host_url,
@@ -59,6 +60,7 @@ module QuickSearch
         result.restricted = restricted
         result.info_link = info_link
         result.item_format = 'database'
+        result.open_access = open_access
         result
       end
 
