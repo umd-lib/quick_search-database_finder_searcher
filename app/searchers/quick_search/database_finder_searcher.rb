@@ -2,7 +2,7 @@
 
 # rubocop:disable Rails/OutputSafety
 module QuickSearch
-  # QuickSearch seacher for Database Finder
+  # QuickSearch searcher for Database Finder
   class DatabaseFinderSearcher < QuickSearch::Searcher
     include Rails.application.routes.url_helpers
     include ActionView::Helpers::TextHelper
@@ -70,7 +70,7 @@ module QuickSearch
     def search_url
       QuickSearch::Engine::DATABASE_FINDER_CONFIG['search_url'] +
         QuickSearch::Engine::DATABASE_FINDER_CONFIG['query_params'] +
-        CGI.escape(sanitized_user_search_query)
+        percent_encoded_raw_user_search_query
     end
 
     def total
@@ -78,15 +78,13 @@ module QuickSearch
     end
 
     def loaded_link
-      QuickSearch::Engine::DATABASE_FINDER_CONFIG['loaded_link'] + sanitized_user_search_query
+      QuickSearch::Engine::DATABASE_FINDER_CONFIG['loaded_link'] + percent_encoded_raw_user_search_query
     end
 
-    # Returns the sanitized search query entered by the user, skipping
+    # Returns the percent-encoded search query entered by the user, skipping
     # the default QuickSearch query filtering
-    def sanitized_user_search_query
-      # Need to use "to_str" as otherwise Japanese text isn't returned
-      # properly
-      sanitize(@q).to_str
+    def percent_encoded_raw_user_search_query
+      CGI.escape(@q)
     end
   end
 end
