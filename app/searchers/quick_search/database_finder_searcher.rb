@@ -15,7 +15,7 @@ module QuickSearch
 
     def build_restricted_link
       link_to(
-        content_tag(:i, '', class: ['fa', 'fa-lock']),
+        content_tag(:i, '', class: %w[fa fa-lock]),
         'https://www.lib.umd.edu/services/remote-access',
         class: ['restricted tiny'],
         remote: true
@@ -23,7 +23,7 @@ module QuickSearch
     end
 
     def build_info_link(href)
-      link_to(content_tag(:i, '', class: ['fa', 'fa-info']),
+      link_to(content_tag(:i, '', class: %w[fa fa-lock]),
               href,
               class: ['info tiny'],
               remote: true)
@@ -35,6 +35,7 @@ module QuickSearch
 
     def results # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       return @results_list if @results_list
+
       @results_list = @response['resultList'].map do |value|
         # We want to show a result even if it doesn't have a hostUrl
         # (some Database Finder entries point to services that are no
